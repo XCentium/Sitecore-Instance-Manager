@@ -17,6 +17,7 @@
   using SIM.Tool.Base.Wizards;
   using Sitecore.Diagnostics.Base;
   using JetBrains.Annotations;
+  using Newtonsoft.Json;
 
   internal class ReadmeToVisibilityConverter : IValueConverter
   {
@@ -122,7 +123,85 @@
 
       modulesList.ItemsSource = _ActualProducts;
       selectedProductLabel.DataContext = args.Product;
+      SIM.Pipelines.Install.InstallArgs iArgs = (SIM.Pipelines.Install.InstallArgs) WizardArgs.ToProcessorArgs();
+      System.Text.StringBuilder sb = new System.Text.StringBuilder();
+      System.IO.StringWriter sw = new System.IO.StringWriter(sb);
+      using (JsonWriter writer = new JsonTextWriter(sw))
+      {
+        writer.Formatting = Formatting.Indented;
+        writer.WriteStartObject();
+
+        writer.WritePropertyName("InstanceName");
+        writer.WriteValue(iArgs.Product.Name);
+
+        writer.WritePropertyName("InstanceHostNames");
+
+        writer.WriteStartArray();
+        foreach (var hostName in iArgs._HostNames)
+        {
+          writer.WriteValue(hostName);
+        }
+        writer.WriteEndArray();
+
+        writer.WritePropertyName("InstanceSqlPrefix");
+        writer.WriteValue(iArgs.InstanceSqlPrefix);
+        writer.WritePropertyName("InstanceAttachSql");
+        writer.WriteValue(iArgs.InstanceAttachSql);
+        writer.WritePropertyName("ProductName");
+        writer.WriteValue(iArgs.Product.ToString());
+        writer.WritePropertyName("RootFolderPath");
+        writer.WriteValue(iArgs.RootFolderPath);
+        writer.WritePropertyName("ConnectionString");
+        writer.WriteValue(iArgs.ConnectionString.ToString());
+        writer.WritePropertyName("SqlServerIdentity");
+        writer.WriteValue(iArgs.SqlServerIdentity);
+        writer.WritePropertyName("WebServerIdentity");
+        writer.WriteValue(iArgs.WebServerIdentity);
+        writer.WritePropertyName("LicenseFilePath");
+        writer.WriteValue(iArgs.LicenseFilePath);
+        writer.WritePropertyName("ForceNetFramework4");
+        writer.WriteValue(iArgs.ForceNetFramework4);
+        writer.WritePropertyName("Is32Bit");
+        writer.WriteValue(iArgs.Is32Bit);
+        writer.WritePropertyName("IsClassic");
+        writer.WriteValue(iArgs.IsClassic);
+        writer.WritePropertyName("InstallRadControls");
+        writer.WriteValue(iArgs.InstallRadControls);
+        writer.WritePropertyName("InstallDictionaries");
+        writer.WriteValue(iArgs.InstallDictionaries);
+        writer.WritePropertyName("ServerSideRedirect");
+        writer.WriteValue(iArgs.ServerSideRedirect);
+        writer.WritePropertyName("IncreaseExecutionTimeout");
+        writer.WriteValue(iArgs.IncreaseExecutionTimeout);
+        writer.WritePropertyName("PreHeat");
+        writer.WriteValue(iArgs.PreHeat);
+        writer.WritePropertyName("InstallRolls8");
+        writer.WriteValue(iArgs.InstallRoles8);
+        writer.WritePropertyName("InstallRolls9");
+        writer.WriteValue(iArgs.InstallRoles9);
+        writer.WritePropertyName("Modules");
+
+        writer.WriteStartArray();
+        foreach (var hostName in iArgs._Modules)
+        {
+          writer.WriteValue(hostName.Name);
+        }
+        writer.WriteEndArray();
+
+        writer.WriteEndObject();
+      }
     }
+
+    public class SIMCmdArgs
+    {
+      public string InstanceName { get; set; }
+      public string [] InstanceHostName { get; set; }
+      public string InstanceSqlPrefix { get; set; }
+      public bool InstanceAttachSql { get; set; }
+
+      public string ProductName { get; set; }
+    }
+
 
     #endregion
 

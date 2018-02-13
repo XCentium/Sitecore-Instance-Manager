@@ -16,7 +16,7 @@
   #region
 
   #endregion
-
+  
   public class InstallWizardArgs : InstallModulesWizardArgs
   {
     #region Properties
@@ -94,6 +94,8 @@
 
       return new InstallArgs(InstanceName, InstanceHostNames, InstanceSqlPrefix, InstanceAttachSql, InstanceProduct, FileSystem.ParseFolder(InstanceRootPath), InstanceConnectionString, SqlServerManager.Instance.GetSqlServerAccountName(InstanceConnectionString), Settings.CoreInstallWebServerIdentity.Value, FileSystem.ParseFile(LicenseFileInfo), InstanceAppPoolInfo.FrameworkVersion == "v4.0", InstanceAppPoolInfo.Enable32BitAppOnWin64, !InstanceAppPoolInfo.ManagedPipelineMode, installRadControls, installDictionaries, (bool)serverSideRedirect, (bool)increaseExecutionTimeout, (bool)preheat, installRoles8, installRoles9, _Modules);
     }
+
+
 
     public static string LastTimeOption(string option)
     {

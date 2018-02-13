@@ -74,6 +74,7 @@ namespace SIM.Tool
 
     protected override void OnStartup([CanBeNull] StartupEventArgs e)
     {
+      
       InitializeLogging();
 
       base.OnStartup(e);
@@ -254,8 +255,16 @@ namespace SIM.Tool
       // Show main window
       try
       {
-        main.Initialize();
-        WindowHelper.ShowDialog(main, null);
+        if (e.Args.Contains("-Console"))
+        {
+          ConsoleHelper.Process(e.Args);
+
+        }
+        else
+        {
+          main.Initialize();
+          WindowHelper.ShowDialog(main, null);
+        }
       }
       catch (Exception ex)
       {
