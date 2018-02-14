@@ -21,7 +21,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Xml;
-using SIM.Tool.CmdLine;
+using SIM.Tool.CommandLine;
 
 namespace SIM.Tool
 {
