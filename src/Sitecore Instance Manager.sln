@@ -39,8 +39,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Foundation.SqlAdapter",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Foundation.SqlAdapter.IntegrationTests", "SIM.Foundation.SqlAdapter.IntegrationTests\SIM.Foundation.SqlAdapter.IntegrationTests.csproj", "{293D8E00-5C24-4E62-9BF7-4E0FB224D1BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Tool.CommandLine", "SIM.Tool.CommandLine\SIM.Tool.CommandLine.csproj", "{B003289B-74E3-4708-82BF-5FC0DBA0B646}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,18 +205,6 @@ Global
 		{293D8E00-5C24-4E62-9BF7-4E0FB224D1BA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{293D8E00-5C24-4E62-9BF7-4E0FB224D1BA}.Release|x86.ActiveCfg = Release|Any CPU
 		{293D8E00-5C24-4E62-9BF7-4E0FB224D1BA}.Release|x86.Build.0 = Release|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Debug|x86.Build.0 = Debug|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Release|x86.ActiveCfg = Release|Any CPU
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -239,7 +225,6 @@ Global
 		{46623BF6-DF60-4A1A-AADF-C0BECE17FE74} = {9285A641-C759-471D-A4FE-9C92C529128C}
 		{3748B30C-ABF5-4DEE-9F22-74E4F69FFF78} = {9285A641-C759-471D-A4FE-9C92C529128C}
 		{293D8E00-5C24-4E62-9BF7-4E0FB224D1BA} = {9285A641-C759-471D-A4FE-9C92C529128C}
-		{B003289B-74E3-4708-82BF-5FC0DBA0B646} = {12CD4F43-229C-4A9F-A2B0-8E1FF16EC6B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F97C0C4-9F5F-48C7-ACB3-983A4AEF8C84}

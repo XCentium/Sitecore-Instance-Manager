@@ -38,6 +38,7 @@ namespace SIM.Tool
   using SIM.IO.Real;
   using SIM.Tool.Windows.Pipelines.Setup;
 
+
   public partial class App
   {
     #region Fields
@@ -257,8 +258,7 @@ namespace SIM.Tool
       {
         if (e.Args.Contains("-Console"))
         {
-          ConsoleHelper.Process(e.Args);
-
+          SIMCmd.CommandLineApp.Process(e.Args);
         }
         else
         {
