@@ -127,13 +127,19 @@ namespace SIM.Tool.SIMCmd
 
       foreach (var module in main.CustomModules)
       {
-        string filename = Path.Combine(ApplicationManager.FilePackagesFolder, module);
+        var path = File.Exists(module) ? module : Path.Combine(CmdSettings.Options.LocalRepository, module);
 
-        FileSystem.FileSystem.Local.File.Copy(module, filename, true);
+        if (!File.Exists(path)) continue;
 
-        if (File.Exists(filename))
+        string filename = Path.GetFileName(path);
+
+        FileSystem.FileSystem.Local.File.Copy(path, Path.Combine(ApplicationManager.FilePackagesFolder, filename), true);
+
+        CopyManifestIfPresent(path, filename);
+
+        if (File.Exists(path))
         {
-          scModules.Add(Product.GetFilePackageProduct(filename));
+          scModules.Add(Product.GetFilePackageProduct(Path.Combine(ApplicationManager.FilePackagesFolder, filename)));
         }
       }
 
@@ -152,6 +158,18 @@ namespace SIM.Tool.SIMCmd
       }
 
       return scModules;
+    }
+
+    private static void CopyManifestIfPresent(string path, string filename)
+    {
+      string manifestFilename = Path.GetFileNameWithoutExtension(filename) + ".manifest.xml";
+
+      string manifestPath = Path.Combine(Path.GetDirectoryName(path), manifestFilename);
+
+      if (File.Exists(manifestPath))
+      {
+        FileSystem.FileSystem.Local.File.Copy(manifestPath, Path.Combine(ApplicationManager.FilePackagesFolder, manifestFilename), true);
+      }
     }
 
     private Product GetProduct(string version, string revision)
