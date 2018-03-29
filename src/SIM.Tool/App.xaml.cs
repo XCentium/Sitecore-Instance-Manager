@@ -218,32 +218,35 @@ namespace SIM.Tool
         return;
       }
 
-      // Initialize Profile Manager
-      if (!InitializeProfileManager(main))
+      if (!e.Args.Contains("-Console"))
       {
-        Log.Info("Application closes due to invalid configuration");
-
-        // Since the main window instance was already created we need to "dispose" it by showing and closing.
-        main.Width = 0;
-        main.Height = 0;
-        main.Show();
-        main.Close();
-
-        Environment.Exit(0);
-
-        return;
-      }
-
-      // Check if user accepted agreement
-      var agreementAcceptedFilePath = Path.Combine(ApplicationManager.TempFolder, "agreement-accepted.txt");
-      if (!File.Exists(agreementAcceptedFilePath))
-      {
-        WizardPipelineManager.Start("agreement", main, new ProcessorArgs(), false, null, () => null);
-        if (!File.Exists(agreementAcceptedFilePath))
+        // Initialize Profile Manager
+        if (!InitializeProfileManager(main))
         {
+          Log.Info("Application closes due to invalid configuration");
+
+          // Since the main window instance was already created we need to "dispose" it by showing and closing.
+          main.Width = 0;
+          main.Height = 0;
+          main.Show();
+          main.Close();
+
           Environment.Exit(0);
 
           return;
+        }
+
+        // Check if user accepted agreement
+        var agreementAcceptedFilePath = Path.Combine(ApplicationManager.TempFolder, "agreement-accepted.txt");
+        if (!File.Exists(agreementAcceptedFilePath))
+        {
+          WizardPipelineManager.Start("agreement", main, new ProcessorArgs(), false, null, () => null);
+          if (!File.Exists(agreementAcceptedFilePath))
+          {
+            Environment.Exit(0);
+
+            return;
+          }
         }
       }
 

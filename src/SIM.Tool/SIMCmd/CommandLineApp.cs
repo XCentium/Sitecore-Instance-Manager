@@ -17,6 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using SIM.Tool.SIMCmd;
+using SIM.Tool.Base.Profiles;
+using SIM.Tool.Windows.Pipelines.Setup;
 
 namespace SIM.Tool.SIMCmd
 {
@@ -29,6 +31,7 @@ namespace SIM.Tool.SIMCmd
       if (options.ParseOptions(args.Skip(1).ToArray()) == 0)
       {
         CommandLineApp console = new CommandLineApp();
+
         console.RunCommand(options);
       }
 
@@ -91,10 +94,6 @@ namespace SIM.Tool.SIMCmd
 
       license = fileSystem.ParseFile(CmdSettings.Options.LicensePath);
 
-      ProductManager.Initialize(CmdSettings.Options.LocalRepository);
-
-      InstanceManager.Default.Initialize(CmdSettings.Options.InstanceRoot);
-
       var pipelinesConfig = XmlDocumentEx.LoadXml(PipelinesConfig.Contents);
 
       var resultPipelinesNode = pipelinesConfig.SelectSingleNode("/pipelines") as XmlElement;
@@ -106,6 +105,35 @@ namespace SIM.Tool.SIMCmd
       ConsolePipelineController controller = new ConsolePipelineController();
 
       connection = new SqlConnectionStringBuilder(CmdSettings.Options.ConnectionString);
+
+      InitProfileManager();
+
+      ProductManager.Initialize(CmdSettings.Options.LocalRepository);
+
+      InstanceManager.Default.Initialize(CmdSettings.Options.InstanceRoot);
+    }
+
+    private void InitProfileManager()
+    {
+      ProfileManager.Initialize(fileSystem);
+      //if (ProfileManager.IsValid)
+      //{
+      //  return;
+      //}
+
+      var profile = ProfileManager.Profile ?? new Profile();
+
+      profile.ConnectionString = connection.ConnectionString;
+
+      profile.InstancesFolder = CmdSettings.Options.InstanceRoot;
+
+      profile.License = CmdSettings.Options.LicensePath;
+
+      profile.LocalRepository = CmdSettings.Options.LocalRepository;
+
+      ProfileManager.SaveChanges(profile);
+
+      File.WriteAllText(Path.Combine(ApplicationManager.TempFolder, "agreement-accepted.txt"), @"agreement accepted");
     }
 
     private IEnumerable<Product> GetModules(Product mainProduct, SimInstallOptions main)

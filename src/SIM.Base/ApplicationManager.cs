@@ -26,7 +26,7 @@ namespace SIM
 
     #region Constants
 
-    public const string AppDataRoot = @"%AppData%\Sitecore\Sitecore Instance Manager";
+    public const string AppDataRoot = @"%AppData%\Sitecore\Sitecore Instance Manager-CMD";
     public const string DefaultConfigurations = "Configurations";
     public const string DefaultPackages = "Packages";
 
